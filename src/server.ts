@@ -7,7 +7,7 @@ import 'express-async-errors';
 import MountVersionString from './utils/MountVersionString';
 
 const corsOptions = {
-  origin: ['https://ligouai-front.vercel.app', 'https://ligouai.com.br'],
+  origin: ['https://ligouai-front.vercel.app', 'https://ligouai.com.br', 'https://www.ligouai.com.br/'],
   credentials: true,
 };
 
