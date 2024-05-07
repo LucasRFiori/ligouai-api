@@ -30,7 +30,7 @@ Inicie o back
 
   /ligouai-api> docker-compose up --build -d
 
-  ligouai-api> pnpm run start
+  /ligouai-api> pnpm run start
 ```
 
 **OBS**: Criar .env com base no .env.example
