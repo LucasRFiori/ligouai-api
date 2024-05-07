@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - 2024-05-07
+
+### Added
+
+- Ipv4 handler
+- Rating Limit
+- Additional origin url for cors
+
+### Change
+
+- Update .env.example
+- Update prisma.schema
+
 ## [0.1.0] - 2024-05-06
 
 ### Added
