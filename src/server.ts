@@ -7,11 +7,25 @@ import 'express-async-errors';
 import MountVersionString from './utils/MountVersionString';
 
 const corsOptions = {
-  origin: ['https://ligouai-front.vercel.app', 'https://ligouai.com.br', 'https://www.ligouai.com.br/'],
+  origin: ['https://ligouai-front.vercel.app', 'https://ligouai.com.br', 'https://www.ligouai.com.br'],
   credentials: true,
 };
 
 const app = express();
+
+const allowedOrigins = ['https://ligouai-front.vercel.app', 'https://ligouai.com.br', 'https://www.ligouai.com.br/'];
+
+app.use((req, res, next) => {
+  const origin = req?.headers?.origin;
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+
+  next();
+});
 
 app.use(express.json());
 app.use(cors(corsOptions));
