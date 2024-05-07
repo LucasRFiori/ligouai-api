@@ -5,26 +5,24 @@ import appConfig from './config/appConfig';
 import ErrorHandler from './middlewares/ErrorHandler';
 import 'express-async-errors';
 import MountVersionString from './utils/MountVersionString';
+import Cors from './middlewares/Cors';
+
+const allowedOrigins = [
+  'https://ligouai-front.vercel.app',
+  'https://ligouai.com.br',
+  'https://www.ligouai.com.br/',
+  appConfig.app.ADDITIONAL_ORIGIN!,
+].filter(Boolean);
 
 const corsOptions = {
-  origin: ['https://ligouai-front.vercel.app', 'https://ligouai.com.br', 'https://www.ligouai.com.br'],
+  origin: allowedOrigins,
   credentials: true,
 };
 
 const app = express();
 
-const allowedOrigins = ['https://ligouai-front.vercel.app', 'https://ligouai.com.br', 'https://www.ligouai.com.br/'];
-
 app.use((req, res, next) => {
-  const origin = req?.headers?.origin;
-  if (origin && allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', '*');
-
-  next();
+  Cors.set(req, res, next, allowedOrigins);
 });
 
 app.use(express.json());
