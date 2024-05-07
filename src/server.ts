@@ -7,7 +7,12 @@ import 'express-async-errors';
 import MountVersionString from './utils/MountVersionString';
 import Cors from './middlewares/Cors';
 
-const allowedOrigins = ['https://ligouai-front.vercel.app', 'https://ligouai.com.br', 'https://www.ligouai.com.br/'];
+const allowedOrigins = [
+  'https://ligouai-front.vercel.app',
+  'https://ligouai.com.br',
+  'https://www.ligouai.com.br/',
+  appConfig.app.ADDITIONAL_ORIGIN!,
+].filter(Boolean);
 
 const corsOptions = {
   origin: allowedOrigins,
