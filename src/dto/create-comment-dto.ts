@@ -37,6 +37,7 @@ export type CreateCommentBodyType = z.infer<typeof bodySchema>;
 
 class CreateCommentDto {
   public async validate(req: Request, _: Response, next: NextFunction) {
+    console.log(req);
     try {
       await bodySchema.parseAsync(req.body);
       next();

@@ -25,6 +25,8 @@ app.use((req, res, next) => {
   Cors.set(req, res, next, allowedOrigins);
 });
 
+app.set('trust proxy', true);
+
 app.use(express.json());
 app.use(cors(corsOptions));
 

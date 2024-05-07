@@ -18,6 +18,10 @@ declare module 'express' {
 
 export const router = Router();
 
+//ADMIN ROUTES
+router.get(MountVersionString.mount('private/phone/all'), AdminAuthValidator.validate, PhoneController.index);
+router.get(MountVersionString.mount('private/comment/all'), AdminAuthValidator.validate, CommentController.index);
+
 //RECENT COMMENTS
 router.get(
   MountVersionString.mount('comment/recent'),
@@ -34,10 +38,6 @@ router.get(
   findbyPhoneDto.validate,
   PhoneController.findByPhone,
 );
-
-//ADMIN ROUTES
-router.get(MountVersionString.mount('phone/all'), AdminAuthValidator.validate, PhoneController.index);
-router.get(MountVersionString.mount('comment/all'), AdminAuthValidator.validate, CommentController.index);
 
 //CREATE PHONE
 router.post(
