@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 class PhoneRepositories {
   findAll(args?: Prisma.PhoneNumberFindManyArgs) {
-    const phones = prisma.phoneNumber.findMany({ ...args });
+    const phones = prisma.phoneNumber.findMany(args);
 
     return phones;
   }

@@ -81,6 +81,7 @@ class CommentController {
           rating: body.rating,
           phoneId: phoneData.id,
           tags: body.tags || [],
+          userIp: req.clientIp || 'Coudnt get IP',
         },
         select: {
           userName: true,

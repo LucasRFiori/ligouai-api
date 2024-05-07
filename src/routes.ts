@@ -6,10 +6,12 @@ import CommentController from './modules/Controllers/CommentController';
 import CreatePhoneDto from './dto/create-phone-dto';
 import CreateCommentDto from './dto/create-comment-dto';
 import findbyPhoneDto from './dto/findby-phone-dto';
+import Ipv4 from './middlewares/Ipv4';
 
 declare module 'express' {
   interface Request {
     authToken?: string;
+    clientIp?: string;
   }
 }
 
@@ -23,4 +25,9 @@ router.get(MountVersionString.mount('phone/:phone'), findbyPhoneDto.validate, Ph
 
 //POST
 router.post(MountVersionString.mount('phone/create'), CreatePhoneDto.validate, PhoneController.store);
-router.post(MountVersionString.mount('comment/create'), CreateCommentDto.validate, CommentController.store);
+router.post(
+  MountVersionString.mount('comment/create'),
+  Ipv4.handle,
+  CreateCommentDto.validate,
+  CommentController.store,
+);

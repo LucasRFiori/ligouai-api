@@ -16,7 +16,6 @@ class CommentRepositories {
     return createdComment;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public mountTags(commentTags: string[], bodytags: string[] | null) {
     let tagList: string[] = [];
 
