@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import PhoneController from './modules/Controllers/PhoneController';
-import AdminAuthValidator from './middlewares/AuthValidator';
-import MountVersionString from './utils/MountVersionString';
 import CommentController from './modules/Controllers/CommentController';
+import AdminAuthValidator from './middlewares/AuthValidator';
+import Ipv4 from './middlewares/Ipv4';
 import CreatePhoneDto from './dto/create-phone-dto';
 import CreateCommentDto from './dto/create-comment-dto';
 import findbyPhoneDto from './dto/findby-phone-dto';
-import Ipv4 from './middlewares/Ipv4';
+import MountVersionString from './utils/MountVersionString';
 
 declare module 'express' {
   interface Request {
