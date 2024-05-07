@@ -17,7 +17,6 @@ export type CreatePhoneBodyType = z.infer<typeof bodySchema>;
 
 class CreatePhoneDto {
   public async validate(req: Request, _: Response, next: NextFunction) {
-    console.log(req);
     try {
       await bodySchema.parseAsync(req.body);
       return next();
