@@ -1,12 +1,21 @@
 import { NextFunction, Request, Response } from 'express';
+import { UnauthorizedException } from '../utils/Exceptions';
 
 class Ipv4 {
   async handle(req: Request, res: Response, next: NextFunction) {
-    const ip = req.ip;
+    try {
+      const ip = req.ip;
 
-    req.clientIp = ip;
+      if (!req.ip) {
+        throw new UnauthorizedException();
+      }
 
-    next();
+      req.clientIp = ip;
+
+      next();
+    } catch (err) {
+      next(err);
+    }
   }
 }
 

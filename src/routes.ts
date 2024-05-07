@@ -7,6 +7,7 @@ import CreatePhoneDto from './dto/create-phone-dto';
 import CreateCommentDto from './dto/create-comment-dto';
 import findbyPhoneDto from './dto/findby-phone-dto';
 import MountVersionString from './utils/MountVersionString';
+import { RateLimit } from './middlewares/RateLimit';
 
 declare module 'express' {
   interface Request {
@@ -17,17 +18,41 @@ declare module 'express' {
 
 export const router = Router();
 
-//GET
+//RECENT COMMENTS
+router.get(
+  MountVersionString.mount('comment/recent'),
+  Ipv4.handle,
+  RateLimit({ limit: 20, windowMs: 5 * 60 * 1000 }),
+  CommentController.recent,
+);
+
+//FIND PHONE
+router.get(
+  MountVersionString.mount('phone/:phone'),
+  Ipv4.handle,
+  RateLimit({ limit: 20, windowMs: 5 * 60 * 1000 }),
+  findbyPhoneDto.validate,
+  PhoneController.findByPhone,
+);
+
+//ADMIN ROUTES
 router.get(MountVersionString.mount('phone/all'), AdminAuthValidator.validate, PhoneController.index);
 router.get(MountVersionString.mount('comment/all'), AdminAuthValidator.validate, CommentController.index);
-router.get(MountVersionString.mount('comment/recent'), CommentController.recent);
-router.get(MountVersionString.mount('phone/:phone'), findbyPhoneDto.validate, PhoneController.findByPhone);
 
-//POST
-router.post(MountVersionString.mount('phone/create'), CreatePhoneDto.validate, PhoneController.store);
+//CREATE PHONE
+router.post(
+  MountVersionString.mount('phone/create'),
+  Ipv4.handle,
+  RateLimit({ limit: 20, windowMs: 5 * 60 * 1000 }),
+  CreatePhoneDto.validate,
+  PhoneController.store,
+);
+
+//CREATE COMMENT
 router.post(
   MountVersionString.mount('comment/create'),
   Ipv4.handle,
+  RateLimit({ limit: 20, windowMs: 5 * 60 * 1000 }),
   CreateCommentDto.validate,
   CommentController.store,
 );
