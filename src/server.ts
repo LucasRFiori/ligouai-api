@@ -10,7 +10,7 @@ import Cors from './middlewares/Cors';
 const allowedOrigins = [
   'https://ligouai-front.vercel.app',
   'https://ligouai.com.br',
-  'https://www.ligouai.com.br/',
+  'https://www.ligouai.com.br',
   appConfig.app.ADDITIONAL_ORIGIN!,
 ].filter(Boolean);
 
