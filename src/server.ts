@@ -6,15 +6,15 @@ import ErrorHandler from './middlewares/ErrorHandler';
 import 'express-async-errors';
 import MountVersionString from './utils/MountVersionString';
 
-const corsOption = {
-  origin: '*',
+const corsOptions = {
+  origin: ['https://ligouai-front.vercel.app', 'https://ligouai.com.br'],
   credentials: true,
 };
 
 const app = express();
 
 app.use(express.json());
-app.use(cors(corsOption));
+app.use(cors(corsOptions));
 
 app.use(router);
 
